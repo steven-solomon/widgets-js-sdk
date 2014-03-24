@@ -1,0 +1,20 @@
+{
+  "name": "widget-sdk",
+  "version": "0.0.1",
+  "homepage": "https://github.com/CrowdTwist/web",
+  "authors": [
+    "Mark Fayngersh <mark@crowdtwist.com>",
+    "Orr Bibring <orr@crowdtwist.com"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "lib",
+    "test"
+  ],
+  "devDependencies": {
+    "es5-shim": "~2.3.0"
+  }
+}
