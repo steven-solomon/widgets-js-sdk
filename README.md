@@ -1,5 +1,7 @@
 # CrowdTwist Widgets SDK for JavaScript
 
+[![Build Status](https://travis-ci.org/CrowdTwist/widgets-js-sdk.svg?branch=develop)](https://travis-ci.org/CrowdTwist/widgets-js-sdk)
+
 The CrowdTwist Widgets SDK for JavaScript provides client-side functionality for embedding various Fan Center components such as Activities and Rewards directly into a third-party webpage.
 
 ## Dependencies
@@ -29,4 +31,5 @@ Specs are written in CoffeeScript and can be found in **test/specs/**.
 To run the test suite:
 
     $ npm install
+    $ bower install
     $ npm test
