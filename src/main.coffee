@@ -10,5 +10,3 @@ if window.CT?._version?
 else
   window.CT =
     _version: "0.0.1"
-    _iframeOrigins: []
-    _originRegex: /(http(s)?:\/\/[^\/?&]+)/

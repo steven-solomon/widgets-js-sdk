@@ -6,6 +6,13 @@ module.exports = (grunt) ->
 
     config:
       buildFile: 'sdk/widgets-new.js'
+      source: [
+        'src/main.coffee'
+        'src/console.coffee'
+        'src/event.coffee'
+        'src/widget.coffee'
+        'src/bootstrap.coffee'
+      ]
       libraries: [
         'lib/es5-shim/es5-shim.js'
       ]
@@ -15,12 +22,7 @@ module.exports = (grunt) ->
         options:
           join: true
         files:
-          '<%= config.buildFile %>': [
-            'src/main.coffee'
-            'src/console.coffee'
-            'src/event.coffee'
-            'src/**/*.coffee'
-          ]
+          '<%= config.buildFile %>': '<%= config.source %>'
       test:
         expand: true
         cwd: 'test/specs'
