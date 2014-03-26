@@ -6,11 +6,12 @@
     "Mark Fayngersh <mark@crowdtwist.com>",
     "Orr Bibring <orr@crowdtwist.com"
   ],
-  "license": "MIT",
+  "license": "Apache v2",
   "private": true,
   "ignore": [
-    "**/.*",
+    "config",
     "node_modules",
+    "src",
     "lib",
     "test"
   ],
