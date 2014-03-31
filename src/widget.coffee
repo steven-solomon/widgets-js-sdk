@@ -7,6 +7,9 @@
     return 0
 
 
+  ###*
+  * Class representing a widget iframe
+  ###
   class Widget
     constructor: ({@src, height}) ->
       # Enforce trailing slash for browser consistency

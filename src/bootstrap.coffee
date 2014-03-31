@@ -10,6 +10,9 @@ CT.console.time "DOM loaded"
 CT.Event._ready ->
   CT.console.timeEnd "DOM loaded"
 
+  CT.console.log "Initializing modal container"
+  CT.Modal._initModalContainer()
+
   widgetTags = document.querySelectorAll "[class=ct-widget]"
 
   CT.console.log "Found", widgetTags.length, "widget tag(s)"

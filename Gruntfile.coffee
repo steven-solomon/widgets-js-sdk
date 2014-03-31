@@ -11,6 +11,7 @@ module.exports = (grunt) ->
         'src/console.coffee'
         'src/event.coffee'
         'src/widget.coffee'
+        'src/modal.coffee'
         'src/bootstrap.coffee'
       ]
       libraries: [
@@ -85,6 +86,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'test', [
     'build'
+    'clean:test'
     'coffee:test'
     'express:test'
     'protractor_webdriver:test'
