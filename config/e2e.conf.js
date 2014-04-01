@@ -11,8 +11,8 @@ exports.config = {
   baseUrl: 'http://localhost:3001',
 
   specs: [
-    '../test/specs/helper.js',
-    '../build/**/*.js'
+    '../test/e2e/helper.js',
+    '../build/e2e/**/*.js'
   ],
 
   // Options to be passed to Jasmine-node.

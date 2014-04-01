@@ -26,7 +26,7 @@ module.exports = (grunt) ->
           '<%= config.buildFile %>': '<%= config.source %>'
       test:
         expand: true
-        cwd: 'test/specs'
+        cwd: 'test'
         src: ['**/*.coffee']
         dest: 'build'
         ext: '.js'
@@ -70,11 +70,18 @@ module.exports = (grunt) ->
           keepAlive: true
           noColor: false
 
+    mochaTest:
+      test:
+        options:
+          reporter: 'spec'
+          require: ['test/unit/helper.js']
+        src: ['build/unit/**/*.js']
+
     clean:
       build:
         src: ['<%= config.buildFile %>']
       test:
-        src: ['build']
+        src: ['build/']
 
 
   grunt.registerTask 'build', [
@@ -84,12 +91,21 @@ module.exports = (grunt) ->
     'uglify:build'
   ]
 
+  grunt.registerTask 'e2e', [
+    'protractor_webdriver:test'
+    'protractor:test'
+  ]
+
+  grunt.registerTask 'unit', [
+    'mochaTest:test'
+  ]
+
   grunt.registerTask 'test', [
     'build'
     'clean:test'
     'coffee:test'
     'express:test'
-    'protractor_webdriver:test'
-    'protractor:test'
+    'unit'
+    'e2e'
     'clean:test'
   ]
