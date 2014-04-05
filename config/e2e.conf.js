@@ -15,10 +15,10 @@ exports.config = {
     '../build/e2e/**/*.js'
   ],
 
-  // Options to be passed to Jasmine-node.
-  jasmineNodeOpts: {
-    showColors: true,
-    isVerbose: true,
-    includeStackTrace: true
+  framework: 'mocha',
+
+  // Options to be passed to Mocha.
+  mochaOpts: {
+    reporter: 'spec'
   }
 };

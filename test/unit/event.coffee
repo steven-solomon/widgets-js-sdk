@@ -1,5 +1,5 @@
 describe 'CT.Event', ->
-  Event = window.CT.Event
+  {Event} = window.CT
 
   it 'should exist', ->
     expect(Event).to.exist

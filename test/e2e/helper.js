@@ -1,5 +1,9 @@
 // This file contains various helper methods that are globally available across all specs
 
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
+
+chai.use(chaiAsPromised);
 
 /**
  * Replacement for default Protractor $ that bypasses Angular requirement
@@ -9,7 +13,7 @@
  */
 browser.$ = function(sel) {
   return browser.driver.findElement(by.css(sel));
-}
+};
 
 /**
  * Replacement for default Protractor browser.get that bypasses Angular requirement
@@ -19,7 +23,7 @@ browser.$ = function(sel) {
  */
 browser.get = function(path) {
   return browser.driver.get(browser.baseUrl + path);
-}
+};
 
 /**
  * Helper method to determine if element exists by selector.
@@ -29,9 +33,9 @@ browser.get = function(path) {
  */
 browser.exists = function(sel) {
   return browser.driver.isElementPresent(by.css(sel));
-}
+};
 
-
-// Now we need to propagate these overrides globally
+global.expect = chai.expect;
 global.$ = browser.$;
 global.exists = browser.exists;
+global.exec = browser.driver.executeScript.bind(browser.driver);
