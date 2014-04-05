@@ -6,10 +6,10 @@ describe 'CT.Event', ->
 
   it 'should contain properties and methods', ->
     expect(Event).to.include.keys [
-      '_addEventListener'
-      '_removeEventListener'
-      '_ready'
-      '_trigger'
+      'addEventListener'
+      'removeEventListener'
+      'ready'
+      'trigger'
       'subscribe'
       'unsubscribe'
     ]
@@ -33,7 +33,7 @@ describe 'CT.Event', ->
       coll: [1,2,3]
 
     Event.subscribe 'testEvent', cb
-    Event._trigger 'testEvent', data
+    Event.trigger 'testEvent', data
 
     expect(cb).to.be.calledOnce
     expect(cb).to.be.calledWith data
@@ -50,7 +50,7 @@ describe 'CT.Event', ->
     Event.subscribe 'testEvent', cb1
     Event.subscribe 'testEvent', cb2
 
-    Event._trigger 'testEvent', data
+    Event.trigger 'testEvent', data
     expect(cb1).to.be.calledOnce
     expect(cb1).to.be.calledWith data
     expect(cb2).to.be.calledOnce
@@ -66,7 +66,7 @@ describe 'CT.Event', ->
 
     Event.subscribe 'activeEvent', cb1
     Event.subscribe 'inactiveEvent', cb2
-    Event._trigger 'activeEvent'
+    Event.trigger 'activeEvent'
 
     expect(cb1).to.be.calledOnce
     expect(cb2).to.not.be.called

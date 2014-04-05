@@ -5,13 +5,14 @@ module.exports = (grunt) ->
     pkg: grunt.file.readJSON 'package.json'
 
     config:
-      buildFile: 'sdk/widgets-new.js'
+      buildFile: 'sdk/widgets.js'
       source: [
         'src/main.coffee'
         'src/console.coffee'
         'src/event.coffee'
         'src/widget.coffee'
         'src/modal.coffee'
+        'src/dispatch.coffee'
         'src/bootstrap.coffee'
       ]
       libraries: [

@@ -16,7 +16,7 @@
       @el.setAttribute "id", "ct-modal"
 
       @closeButton = document.createElement "button"
-      CT.Event._addEventListener @closeButton, "click", =>
+      CT.Event.addEventListener @closeButton, "click", =>
         @hide()
 
       @iframe = document.createElement "iframe"
@@ -101,7 +101,7 @@
     *
     * Modal is identified by the id: ct-modal
     ###
-    _initModalContainer: ->
+    initModalContainer: ->
       if document.getElementById("ct-modal")?
         CT.console.log "Modal container #ct-modal already exists!"
         return

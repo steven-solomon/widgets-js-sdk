@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Widget 1</title>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <style type="text/css">
+    .widget-activities {
+      padding: 10px;
+      border: 1px solid #f5f5f5;
+    }
+
+    h3 {
+      margin-top: 0px;
+    }
+
+    .activity {
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #f5f5f5;
+      border: 1px solid #d5d5d5;
+
+      -webkit-box-shadow: 0px 1px 1px 0px #d5d5d5;
+      -moz-box-shadow: 0px 1px 1px 0px #d5d5d5;
+      box-shadow: 0px 1px 1px 0px #d5d5d5;
+    }
+
+    .avatar {
+      background-color: #bc3a37;
+      color: white;
+      font-size: 20px;
+      padding: 10px;
+    }
+
+    .activity-icon {
+    }
+
+    .activity-content {
+    }
+
+    .title {
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .description {
+      font-size: 11px;
+      color: #8993a6;
+    }
+
+    .points {
+      margin-bottom: 0;
+      color: #bc3a37;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    @media (min-width: 768px) {
+      .widget-activities {
+        width: 768px;
+      }
+
+      .activity-icon {
+        float: left;
+      }
+
+      .activity-content {
+        float: left;
+        margin-left: 10px;
+      }
+
+      .points {
+        position: relative;
+        bottom: 55px;
+        left: 200px;
+      }
+    }
+  </style>
+</head>
+<body onload="loaded()">
+<script type="text/javascript">
+  window.addEventListener('message', function (event) {
+    var payload = JSON.parse(event.data);
+
+    if (payload.eventName === "logout") {
+      document.body.innerText = payload.eventData.user.name + " has logged out!";
+    }
+  }, false);
+
+  function loaded() {
+    var payload = {
+      widgetId: 1,
+      eventName: 'resize',
+      eventData: {
+        height: document.body.offsetHeight
+      }
+    };
+    window.parent.postMessage(JSON.stringify(payload), '*');
+  }
+
+  function navigate() {
+    var payload = {
+      widgetId: 1,
+      eventName: 'navigate',
+      eventData: {
+        url: 'http://google.com'
+      }
+    };
+    window.parent.postMessage(JSON.stringify(payload), '*');
+  }
+</script>
+
+<div class="widget-activities" onclick="navigate();">
+  <h3>Available Activities
+    <small class="visible-xs">On Mobile!</small>
+    <small class="hidden-xs" style="color:#bc3a37;">On Desktop!</small>
+  </h3>
+
+  <div class="activity clearfix">
+    <div class="activity-icon">
+      <span class="avatar img-circle glyphicon glyphicon-pencil"></span>
+    </div>
+
+    <div class="activity-content">
+      <p class="title">Write a Product Review</p>
+
+      <p class="description">Have you used a product lately? Tell us what you think!</p>
+
+      <p class="points">+5 Points</p>
+    </div>
+  </div>
+
+  <div class="activity clearfix">
+    <div class="activity-icon">
+      <span class="avatar img-circle glyphicon glyphicon-user"></span>
+    </div>
+
+    <div class="activity-content">
+      <p class="title">Invite a friend</p>
+
+      <p class="description">Invite a friend via Facebook, Twitter, or email. When they sign up, you each receive +15
+        Points!</p>
+
+      <p class="points">+15 Points</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

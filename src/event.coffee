@@ -45,18 +45,18 @@
 
   CT.Event =
     ###*
-    * Internal shim for default browser addEventListener with IE 8 fallback
+    * Shim for default browser addEventListener with IE 8 fallback
     ###
-    _addEventListener: (el, name, handler) ->
+    addEventListener: (el, name, handler) ->
       if typeof el.addEventListener is "function"
         el.addEventListener name, handler
       else
         el.attachEvent "on" + name, handler
 
     ###*
-    * Internal shim for default browser removeEventListener with IE 8 fallback
+    * Shim for default browser removeEventListener with IE 8 fallback
     ###
-    _removeEventListener: (el, name, handler) ->
+    removeEventListener: (el, name, handler) ->
       if typeof el.removeEventListener is "function"
         el.removeEventListener name, handler
       else
@@ -65,7 +65,7 @@
     ###*
     * Executes a function when the DOM is fully loaded
     ###
-    _ready: (handler) ->
+    ready: (handler) ->
       if typeof document.addEventListener is "function"
         document.addEventListener "DOMContentLoaded", handler
       else
@@ -73,12 +73,12 @@
           handler() if document.readyState is "complete"
 
     ###*
-     * Private function to be used by Widget SDK to trigger certain events
+     * Used by Widget SDK to trigger certain events
      *
      * @param  {String} name        Name of event to trigger
      * @param  {Array}  arguments   Variable list of arguments to pass to callbacks
     ###
-    _trigger: (name) ->
+    trigger: (name) ->
       return this unless @_events?
 
       args = Array.prototype.slice.call arguments, 1
