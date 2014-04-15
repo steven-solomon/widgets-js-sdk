@@ -8,21 +8,57 @@
 
 
   ###*
-  * Class that represents the modal container. Instantiated by CT.Widget._initModalContainer()
+  * Class that represents the modal container. Instantiated by CT.Widget.initModalContainer()
   *###
   class Modal
+    containerStyle:
+      display: 'none'
+      zIndex: '100000'
+      margin: 'auto'
+      width: '90%'
+      position: 'fixed'
+      top: '0'
+      right: '0'
+      bottom: '0'
+      left: '0'
+      backgroundColor: '#414141'
+      boxShadow: '0px 19px 33px -11px rgba(0, 0, 0, 0.75)'
+
+    closeButtonStyle:
+      float: 'right'
+      background: 'none'
+      border: 'none'
+      color: '#ffffff'
+      fontSize: '20px'
+      cursor: 'pointer'
+
+    iframeStyle:
+      width: '100%'
+      borderTop: '2px solid #000000'
+
+    backgroundStyle:
+      display: 'none'
+      position: 'fixed'
+      top: '0'
+      left: '0'
+      width: '100%'
+      height: '100%'
+      zIndex: '1000'
+      backgroundColor: '#000000'
+      opacity: '0.7'
+      filter: 'alpha(opacity=70)'
+
     constructor: ->
       @el = document.createElement "div"
       @el.setAttribute "id", "ct-modal"
 
       @closeButton = document.createElement "button"
-      CT.Event.addEventListener @closeButton, "click", =>
-        @hide()
+      CT.Event.addEventListener @closeButton, "click", => @hide()
 
       @iframe = document.createElement "iframe"
       @background = document.createElement "div"
 
-      @_applyStyles()
+      @_initStyles()
 
       @el.appendChild @closeButton
       @el.appendChild @iframe
@@ -49,48 +85,23 @@
     ###*
     * Called from the constructor to apply styling to the modal and related elements
     *###
-    _applyStyles: ->
-      # Modal container div styling
+    _initStyles: ->
+      # Modal container
       @el.setAttribute "id", "ct-modal"
-      @el.style.display = "none"
-      @el.style.zIndex = "100000"
-      @el.style.margin = "auto"
-      @el.style.width = "90%"
-      @el.style.position = "fixed"
-      @el.style.top = "0"
-      @el.style.right = "0"
-      @el.style.bottom = "0"
-      @el.style.left = "0"
-      @el.style.backgroundColor = "#414141"
-      @el.style.boxShadow = "0px 19px 33px -11px rgba(0, 0, 0, 0.75)"
+      @el.style[attribute] = value for attribute, value of @containerStyle
 
-      # Close button styling
+      # Close button
       @closeButton.innerHTML = "&#10005;"
-      @closeButton.style.float = "right"
-      @closeButton.style.background = "none"
-      @closeButton.style.border = "none"
-      @closeButton.style.color = "#fff"
-      @closeButton.style.fontSize = "20px"
-      @closeButton.style.cursor = "pointer"
+      @closeButton.style[attribute] = value for attribute, value of @closeButtonStyle
 
-      # Modal iframe styling
+      # Modal iframe
       @iframe.setAttribute "frameborder", 0
       @iframe.setAttribute "scrolling", "no"
-      @iframe.style.width = "100%"
-      @iframe.style.borderTop = "2px solid #000"
+      @iframe.style[attribute] = value for attribute, value of @iframeStyle
 
-      # Modal dimmed background styling
+      # Modal dimmed background
       @background.setAttribute "id", "ct-modal-background"
-      @background.style.display = "none"
-      @background.style.position = "fixed"
-      @background.style.top = "0"
-      @background.style.left = "0"
-      @background.style.width = "100%"
-      @background.style.height = "100%"
-      @background.style.zIndex = "1000"
-      @background.style.background = "#000"
-      @background.style.opacity = "0.7"
-      @background.style.filter = "alpha(opacity=70)"
+      @background.style[attribute] = value for attribute, value of @backgroundStyle
 
 
   CT.Modal =
