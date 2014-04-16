@@ -25,6 +25,34 @@
       @el.setAttribute "src", @src
       @el.style.width = "100%";
 
+      @_attachListeners()
+
+    ###*
+    * Called during widget initialization, responsible for attaching event handler to
+    * window.postMessage and reacting to widget events like 'resize'.
+    *
+    * For widget-independent event handling, check out the dispatch module.
+    *###
+    _attachListeners: ->
+      CT.Event.addEventListener window, 'message', (event) =>
+        unless CT.Widget.hasOrigin event.origin
+          CT.console.log "[Widget #{@id}] Received event from unregistered origin, dropping:", event
+          return
+
+        payload = JSON.parse event.data
+        if @id is payload.widgetId
+          switch payload.eventName
+            when 'resize'
+              {height} = payload.eventData
+              if height?
+                @setHeight height
+              else
+                CT.console.log "[Widget #{@id}] Received 'resize' event with no 'height'", payload
+            else
+              # Nothing to do for specific widget
+
+        @sendMessage payload
+
     setHeight: (height) ->
       @el.style.height = height + "px"
 
@@ -106,11 +134,4 @@
       for widget in @_widgets
         return widget if widget.id is widgetId
 
-    ###*
-    * Does a `postMessage` on all registered widget iframes with given payload
-    *
-    * @param {Object} payload Contains info such as eventName and eventData
-    ###
-    sendMessageToAllWidgets: (payload) ->
-      widget.sendMessage payload for widget in @_widgets
 )(window.CT)

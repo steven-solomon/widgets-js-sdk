@@ -11,5 +11,4 @@ describe 'CT.Widget', ->
       'replaceTagWithWidget'
       'hasOrigin'
       'getWidgetByWidgetId'
-      'sendMessageToAllWidgets'
     ]
