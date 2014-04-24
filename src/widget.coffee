@@ -40,7 +40,7 @@
           return
 
         payload = JSON.parse event.data
-        if @id is payload.widgetId
+        if @id is parseInt payload.widgetId, 10
           switch payload.eventName
             when 'resize'
               {height} = payload.eventData
