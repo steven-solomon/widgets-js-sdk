@@ -8,6 +8,8 @@ describe 'CT.Widget', ->
     expect(Widget).to.include.keys [
       '_widgets'
       '_originRegex'
+      'addWidget'
+      'removeWidget'
       'replaceTagWithWidget'
       'hasOrigin'
       'getWidgetByWidgetId'

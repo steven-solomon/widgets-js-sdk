@@ -21,7 +21,6 @@
       right: '0'
       bottom: '0'
       left: '0'
-      backgroundColor: '#414141'
       boxShadow: '0px 19px 33px -11px rgba(0, 0, 0, 0.75)'
 
     closeButtonStyle:
@@ -30,11 +29,8 @@
       border: 'none'
       color: '#ffffff'
       fontSize: '20px'
+      outline: 'none'
       cursor: 'pointer'
-
-    iframeStyle:
-      width: '100%'
-      borderTop: '2px solid #000000'
 
     backgroundStyle:
       display: 'none'
@@ -55,21 +51,33 @@
       @closeButton = document.createElement "button"
       CT.Event.addEventListener @closeButton, "click", => @hide()
 
-      @iframe = document.createElement "iframe"
       @background = document.createElement "div"
 
       @_initStyles()
 
       @el.appendChild @closeButton
-      @el.appendChild @iframe
 
     ###*
-    * Shows the modal and sets the iframe to the specified url
+    * Shows the modal and initializes a new widget inside the modal
     *
-    * @param {String} url The url of the widget to display in the modal
+    * @param {Number} id  The id of the widget
+    * @param {String} src The url of the widget to display in the modal
+    *
+    * @example
+    *   CT.Modal.show
+    *     id: 0
+    *     src: 'http://rewards.crowdtwist.com/widgets/t/account-overview/0'
     *###
-    showWithWidgetUrl: (url) ->
-      @iframe.setAttribute "src", url
+    show: ({id, src}) ->
+      if @widget?
+        @el.removeChild @widget.el
+        CT.Widget.removeWidget @widget
+
+      @widget = CT.Widget.addWidget
+        id: id
+        src: src
+      @el.appendChild @widget.el
+
       @el.style.display = ""
       @background.style.display = ""
       return this
@@ -82,6 +90,14 @@
       @background.style.display = "none"
       return this
 
+    setWidth: (width) ->
+      width = parseInt width, 10
+      @el.style.width = width + "px"
+
+    setHeight: (height) ->
+      height = parseInt height, 10
+      @el.style.height = height + "px"
+
     ###*
     * Called from the constructor to apply styling to the modal and related elements
     *###
@@ -93,11 +109,6 @@
       # Close button
       @closeButton.innerHTML = "&#10005;"
       @closeButton.style[attribute] = value for attribute, value of @closeButtonStyle
-
-      # Modal iframe
-      @iframe.setAttribute "frameborder", 0
-      @iframe.setAttribute "scrolling", "no"
-      @iframe.style[attribute] = value for attribute, value of @iframeStyle
 
       # Modal dimmed background
       @background.setAttribute "id", "ct-modal-background"
@@ -121,12 +132,22 @@
       document.body.insertBefore @_modal.background, document.body.firstChild
       document.body.insertBefore @_modal.el, document.body.firstChild
 
-    showWithWidgetUrl: (url) ->
+    setWidth: (width) ->
+      width = parseInt width, 10
+      @_modal.setWidth width
+
+    setHeight: (height) ->
+      height = parseInt height, 10
+      @_modal.setHeight height
+
+    show: ({id, src}) ->
       unless @_modal?
         CT.console.log "Modal not initialized!"
         return
 
-      @_modal.showWithWidgetUrl url
+      @_modal.show
+        id: id
+        src: src
 
     hide: ->
       unless @_modal?

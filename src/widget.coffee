@@ -25,7 +25,7 @@
       @el.setAttribute "src", @src
       @el.style.width = "100%";
 
-      @_attachListeners()
+      CT.Event.addEventListener window, 'message', @_onMessage
 
     ###*
     * Called during widget initialization, responsible for attaching event handler to
@@ -33,28 +33,39 @@
     *
     * For widget-independent event handling, check out the dispatch module.
     *###
-    _attachListeners: ->
-      CT.Event.addEventListener window, 'message', (event) =>
-        unless CT.Widget.hasOrigin event.origin
-          CT.console.log "[Widget #{@id}] Received event from unregistered origin, dropping:", event
-          return
+    _onMessage: (event) =>
+      unless CT.Widget.hasOrigin event.origin
+        CT.console.log "[Widget #{@id}] Received event from unregistered origin, dropping:", event
+        return
 
-        payload = JSON.parse event.data
-        if @id is parseInt payload.widgetId, 10
-          switch payload.eventName
-            when 'resize'
-              {height} = payload.eventData
-              if height?
-                @setHeight height
-              else
-                CT.console.log "[Widget #{@id}] Received 'resize' event with no 'height'", payload
+      payload = JSON.parse event.data
+      if @id is parseInt payload.widgetId, 10
+        switch payload.eventName
+          when 'resize'
+            {height} = payload.eventData
+            if height?
+              @setHeight height
             else
-              # Nothing to do for specific widget
+              CT.console.log "[Widget #{@id}] Received 'resize' event with no 'height'", payload
+          else
+            # Nothing to do for specific widget
 
-        @sendMessage payload
+      @sendMessage payload
+
+    ###*
+     * Unregisters the #_onMessage 'message' handler
+    ###
+    _removeListeners: ->
+      CT.Event.removeEventListener window, 'message', @_onMessage
+
 
     setHeight: (height) ->
+      height = parseInt height, 10
       @el.style.height = height + "px"
+
+      # If widget is contained in modal, set the
+      # modal container height as well
+      CT.Modal.setHeight height if @el.parentNode is CT.Modal._modal.el
 
     ###*
     * Does `postMessage` on the iframe (@el) with given payload
@@ -82,6 +93,31 @@
     _originRegex: /((http(s)?:)?\/\/[^\/?&]+)/
 
     ###*
+     * Given a widget id and src, creates a new Widget and adds it to
+     * the list of _widgets
+     *
+     * @param {Number} id   The widget id
+     * @param {String} src  Tne widget url
+    ###
+    addWidget: ({id, src}) ->
+      widget = new Widget
+        id: id
+        src: src
+
+      @_widgets.push widget
+      return widget
+
+    ###*
+     * Removes a Widget object from _widgets, unregistering listeners along the way
+     *
+     * @param  {Widget} widget The Widget object to remove
+    ###
+    removeWidget: (widget) ->
+      widget._removeListeners()
+      index = @_widgets.indexOf widget
+      @_widgets.splice index, 1 if index > -1
+
+    ###*
       * Converts a widget tag DOM element into an iframe DOM element.
       * Used during initial bootstrapping of a client page.
       *
@@ -102,11 +138,9 @@
         CT.console.groupEnd()
         return
 
-      widget = new Widget
+      widget = @addWidget
         id: id
         src: src
-
-      @_widgets.push widget
 
       widgetTag.parentNode.replaceChild widget.el, widgetTag
       CT.console.log "Replaced tag", widgetTag, "with widget", widget

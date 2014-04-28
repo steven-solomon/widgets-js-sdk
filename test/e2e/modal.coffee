@@ -10,7 +10,6 @@ describe 'SDK: Modal', ->
 
       expect(modalEl.isDisplayed()).to.eventually.equal false
       expect(modalEl.isElementPresent(By.css('button'))).to.eventually.equal true
-      expect(modalEl.isElementPresent(By.css('iframe'))).to.eventually.equal true
 
     it 'should initialize modal background', ->
       expect(exists('#ct-modal-background')).to.eventually.equal true
@@ -19,10 +18,12 @@ describe 'SDK: Modal', ->
 
       expect(modalBackgroundEl.isDisplayed()).to.eventually.equal false
 
-  describe 'showWithWidgetUrl()', ->
+  describe 'show()', ->
     it 'should display modal with widget url', ->
       exec ->
-        CT.Modal.showWithWidgetUrl '//localhost:3001/widget2.html'
+        CT.Modal.show
+          id: 0
+          src: '//localhost:3001/widget2.html'
 
       modalEl = $('#ct-modal')
       modalBackgroundEl = $('#ct-modal-background')
@@ -30,7 +31,7 @@ describe 'SDK: Modal', ->
 
       expect(modalEl.isDisplayed()).to.eventually.equal true
       expect(modalBackgroundEl.isDisplayed()).to.eventually.equal true
-      expect(modalIframeEl.getAttribute('src')).to.eventually.equal 'http://localhost:3001/widget2.html'
+      expect(modalIframeEl.getAttribute('src')).to.eventually.equal 'http://localhost:3001/widget2.html/'
 
   describe 'hide()', ->
     it 'should hide modal', ->
@@ -45,7 +46,9 @@ describe 'SDK: Modal', ->
 
     it 'should hide modal with button click', ->
       exec ->
-        CT.Modal.showWithWidgetUrl '//localhost:3001/widget2.html'
+        CT.Modal.show
+          id: 0
+          src: '//localhost:3001/widget2.html'
 
       modalEl = $('#ct-modal')
       modalBackgroundEl = $('#ct-modal-background')

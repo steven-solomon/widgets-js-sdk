@@ -7,6 +7,8 @@ describe 'CT.Modal', ->
   it 'should contain properties and methods', ->
     expect(Modal).to.include.keys [
       'initModalContainer'
-      'showWithWidgetUrl'
+      'setWidth'
+      'setHeight'
+      'show'
       'hide'
     ]
