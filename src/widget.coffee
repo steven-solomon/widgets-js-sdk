@@ -85,7 +85,7 @@
     ###
     sendMessage: (payload) ->
       payload = JSON.stringify payload unless typeof payload is "string"
-      @el.contentWindow.postMessage payload, window.location.origin
+      @el.contentWindow.postMessage payload, '*'
 
 
   CT.Widget =
