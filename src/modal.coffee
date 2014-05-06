@@ -140,7 +140,7 @@
       height = parseInt height, 10
       @_modal.setHeight height
 
-    show: ({id, src}) ->
+    show: ({id, src, width}) ->
       unless @_modal?
         CT.console.log "Modal not initialized!"
         return
@@ -148,6 +148,8 @@
       @_modal.show
         id: id
         src: src
+
+      @setWidth width if width?
 
     hide: ->
       unless @_modal?

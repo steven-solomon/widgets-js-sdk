@@ -19,11 +19,12 @@ CT.Event.addEventListener window, 'message', (event) ->
   # Some messages require actions to be taken, dispatch them here
   switch payload.eventName
     when "modal"
-      {widgetId, src} = payload.eventData
+      {widgetId, src, width} = payload.eventData
       if widgetId? and src?
         CT.Modal.show
           id: widgetId
           src: src
+          width: width
       else
         CT.console.log "[Dispatch] Received 'modal' event with no 'widgetId' and/or 'src' eventData properties", payload
     when "navigate"
