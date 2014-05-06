@@ -33,5 +33,7 @@ CT.Event.addEventListener window, 'message', (event) ->
         window.open url, "_blank"
       else
         CT.console.log "[Dispatch] Received 'navigate' event with no 'url'", payload
+    when "loginSuccess"
+      CT.Modal.hide()
     else
       CT.console.log "[Dispatch] Received event '#{payload.eventName}', doing nothing", payload
