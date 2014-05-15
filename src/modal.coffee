@@ -92,7 +92,7 @@
 
     setWidth: (width) ->
       width = parseInt width, 10
-      @el.style.width = width + "px"
+      @el.style.maxWidth = width + "px"
 
     setHeight: (height) ->
       height = parseInt height, 10
