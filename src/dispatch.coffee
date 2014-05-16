@@ -18,7 +18,7 @@ CT.Event.addEventListener window, 'message', (event) ->
 
   # Some messages require actions to be taken, dispatch them here
   switch payload.eventName
-    when "modal"
+    when "modal:open"
       {widgetId, src, width} = payload.eventData
       if widgetId? and src?
         CT.Modal.show
@@ -27,13 +27,15 @@ CT.Event.addEventListener window, 'message', (event) ->
           width: width
       else
         CT.console.log "[Dispatch] Received 'modal' event with no 'widgetId' and/or 'src' eventData properties", payload
+    when "modal:close"
+      CT.Modal.hide()
     when "navigate"
       {url} = payload.eventData
       if url?
         window.open url, "_blank"
       else
         CT.console.log "[Dispatch] Received 'navigate' event with no 'url'", payload
-    when "user:update"
-      CT.Modal.hide()
     else
-      CT.console.log "[Dispatch] Received event '#{payload.eventName}', doing nothing", payload
+      # Nothing special
+
+  CT.console.log "[Dispatch] Received event '#{payload.eventName}' from widget '#{payload.widgetId}' with data:", payload.eventData
