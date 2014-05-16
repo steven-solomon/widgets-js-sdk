@@ -52,6 +52,8 @@
 
       @sendMessage payload
 
+      CT.console.log "[Widget #{@id}] Received event '#{payload.eventName}' from widget '#{payload.widgetId}' with data:", payload.eventData
+
     ###*
      * Unregisters the #_onMessage 'message' handler
     ###
