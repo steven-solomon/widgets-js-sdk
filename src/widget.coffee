@@ -63,7 +63,12 @@
 
     setHeight: (height) ->
       height = parseInt height, 10
-      @el.style.height = height + "px"
+
+      if height is 0
+        @el.style.display = 'none'
+      else
+        @el.style.display = ''
+        @el.style.height = height + "px"
 
       # If widget is contained in modal, set the
       # modal container height as well

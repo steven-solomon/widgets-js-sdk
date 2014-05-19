@@ -99,7 +99,12 @@
 
     setHeight: (height) ->
       height = parseInt height, 10
-      @el.style.height = height + "px"
+
+      if height is 0
+        @el.style.display = 'none'
+      else
+        @el.style.display = ''
+        @el.style.height = height + "px"
 
     ###*
     * Called from the constructor to apply styling to the modal and related elements
