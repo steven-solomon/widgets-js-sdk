@@ -103,7 +103,7 @@
     ###
     addWidget: ({id, src}) ->
       widget = new Widget
-        id: id
+        id: id ? 0
         src: src
 
       @_widgets.push widget

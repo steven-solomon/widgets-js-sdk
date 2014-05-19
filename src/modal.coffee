@@ -57,6 +57,10 @@
 
       @el.appendChild @closeButton
 
+    removeCurrentWidget: =>
+      @el.removeChild @widget.el
+      CT.Widget.removeWidget @widget
+
     ###*
     * Shows the modal and initializes a new widget inside the modal
     *
@@ -69,13 +73,12 @@
     *     src: 'http://rewards.crowdtwist.com/widgets/t/account-overview/0'
     *###
     show: ({id, src}) ->
-      if @widget?
-        @el.removeChild @widget.el
-        CT.Widget.removeWidget @widget
+      @removeCurrentWidget() if @widget?
 
       @widget = CT.Widget.addWidget
-        id: id
+        id: id ? 0
         src: src
+
       @el.appendChild @widget.el
 
       @el.style.display = ""

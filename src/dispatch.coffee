@@ -20,15 +20,15 @@ CT.Event.addEventListener window, 'message', (event) ->
   switch payload.eventName
     when "modal:open"
       {widgetId, src, width} = payload.eventData
-      if widgetId? and src?
+      if src?
         CT.console.log "[Dispatch] Received 'modal:open' event, opening modal with data:", payload.eventData
 
         CT.Modal.show
-          id: widgetId
+          id: widgetId ? 0
           src: src
           width: width
       else
-        CT.console.log "[Dispatch] Received 'modal:open' event with no 'widgetId' and/or 'src' eventData properties", payload
+        CT.console.log "[Dispatch] Received 'modal:open' event with no 'src' eventData properties", payload
     when "modal:close"
       CT.Modal.hide()
     when "navigate"
