@@ -6,6 +6,7 @@
   * For widget-specific events like 'resize', check out the Widget class in the
   * CT.Widget module.
 ###
+
 CT.Event.addEventListener window, 'message', (event) ->
   unless CT.Widget.hasOrigin event.origin
     CT.console.log "[Dispatch] Received event from unregistered origin, dropping:", event

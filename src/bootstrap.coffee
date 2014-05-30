@@ -10,6 +10,18 @@ CT.console.time "DOM loaded"
 CT.Event.ready ->
   CT.console.timeEnd "DOM loaded"
 
+  # Used by CT.Modal to start and stop responsive mode when displaying modals
+  CT.console.log "Initializing viewport meta tag"
+  if (metaTag = document.querySelector("meta[name='viewport']"))?
+    CT._metaTag = metaTag
+    CT._metaTagContent = metaTag.getAttribute 'content'
+  else
+    metaTag = document.createElement "meta"
+    metaTag.setAttribute "name", "viewport"
+    CT._metaTag = metaTag
+    CT._metaTagContent = ''
+    document.head.appendChild CT._metaTag
+
   CT.console.log "Initializing modal container"
   CT.Modal.initModalContainer()
 

@@ -21,7 +21,6 @@
       right: '0'
       bottom: '0'
       left: '0'
-      boxShadow: '0px 19px 33px -11px rgba(0, 0, 0, 0.75)'
 
     closeButtonStyle:
       float: 'right'
@@ -83,6 +82,10 @@
 
       @el.style.display = ""
       @background.style.display = ""
+
+      # Set responsive mode when displaying modal
+      CT._metaTag.setAttribute 'content', "width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no"
+
       return this
 
     ###*
@@ -91,6 +94,10 @@
     hide: ->
       @el.style.display = "none"
       @background.style.display = "none"
+
+      # Revert back to default viewport when hiding modal
+      CT._metaTag.setAttribute 'content', CT._metaTagContent
+
       return this
 
     setWidth: (width) ->
