@@ -72,8 +72,6 @@
     *     src: 'http://rewards.crowdtwist.com/widgets/t/account-overview/0'
     *###
     show: ({id, src}) ->
-      @removeCurrentWidget() if @widget?
-
       @widget = CT.Widget.addWidget
         id: id ? 0
         src: src
@@ -97,6 +95,8 @@
 
       # Revert back to default viewport when hiding modal
       CT._metaTag.setAttribute 'content', CT._metaTagContent
+
+      @removeCurrentWidget() if @widget?
 
       return this
 
