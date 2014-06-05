@@ -40,6 +40,8 @@
 
       payload = JSON.parse event.data
       if @id is parseInt payload.widgetId, 10
+        CT.console.log "[Widget #{@id}] Received event '#{payload.eventName}' with data:", payload.eventData
+
         switch payload.eventName
           when 'resize'
             {height} = payload.eventData
@@ -51,8 +53,6 @@
             # Nothing to do for specific widget
 
       @sendMessage payload
-
-      CT.console.log "[Widget #{@id}] Received event '#{payload.eventName}' from widget '#{payload.widgetId}' with data:", payload.eventData
 
     ###*
      * Unregisters the #_onMessage 'message' handler
