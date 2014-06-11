@@ -72,7 +72,7 @@
     *     src: 'http://rewards.crowdtwist.com/widgets/t/account-overview/0'
     *###
     show: ({id, src}) ->
-      @removeCurrentWidget() if CT.Widget.getWidgetByWidgetId(@widget?.id)?
+      @removeCurrentWidget() if CT.Widget.getWidgetByWidgetId(@widget?.id)?.inModal()
 
       @widget = CT.Widget.addWidget
         id: id ? 0

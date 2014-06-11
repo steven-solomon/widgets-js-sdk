@@ -60,6 +60,12 @@
     _removeListeners: ->
       CT.Event.removeEventListener window, 'message', @_onMessage
 
+    ###*
+     * Helper function that returns if widget is being shown in a modal
+     * @return {Boolean} Is widget in a modal?
+    ###
+    inModal: ->
+      @el.parentNode is CT.Modal._modal.el
 
     setHeight: (height) ->
       height = parseInt height, 10
@@ -72,7 +78,7 @@
 
       # If widget is contained in modal, set the
       # modal container height as well
-      CT.Modal.setHeight height if @el.parentNode is CT.Modal._modal.el
+      CT.Modal.setHeight height if @inModal()
 
     ###*
     * Does `postMessage` on the iframe (@el) with given payload
