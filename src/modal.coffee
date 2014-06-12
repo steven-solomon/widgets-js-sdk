@@ -17,7 +17,7 @@
       margin: 'auto'
       width: '90%'
       position: 'fixed'
-      top: '100px'
+      top: '10%'
       right: '0'
       bottom: '0'
       left: '0'
