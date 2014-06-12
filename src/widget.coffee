@@ -6,7 +6,6 @@
     console.log "Error: Could not find global CT namespace!"
     return 0
 
-
   ###*
   * Class representing a widget
   ###
@@ -19,6 +18,8 @@
       @origin = @src.match(CT.Widget._originRegex)[0]
 
       @el = document.createElement "iframe"
+      @$el = CT.$(@el)
+
       @el.setAttribute "frameborder", 0
       @el.setAttribute "scrolling", "no"
       @el.setAttribute "data-widget-id", @id
@@ -76,15 +77,14 @@
       height = parseInt height, 10
 
       if height is 0
-        CT.$(@el).hide().height(0)
+        @$el.hide().height(0)
       else
-        if CT.$(@el).height() is 0
-          CT.$(@el).height(height).delay(200).fadeIn('slow')
-          CT.Modal.hasLoaded() if @inModal()
+        if @$el.height() is 0
+          @$el.height(height).delay(200).fadeIn('slow')
+          CT.Modal.hasLoaded(height) if @inModal()
         else
-          CT.$(@el).animate
-            height: height
-          , 200
+          @$el.height height
+          CT.Modal.setHeight height if @inModal()
 
     ###*
     * Does `postMessage` on the iframe (@el) with given payload
