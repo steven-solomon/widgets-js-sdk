@@ -17,7 +17,7 @@
       margin: 'auto'
       width: '90%'
       position: 'fixed'
-      top: '0'
+      top: '100px'
       right: '0'
       bottom: '0'
       left: '0'
@@ -47,20 +47,21 @@
       @el = document.createElement "div"
       @$el = CT.$(@el)
 
-      @el.setAttribute "id", "ct-modal"
+      @$el.attr "id", "ct-modal"
 
       @closeButton = document.createElement "button"
-      CT.Event.addEventListener @closeButton, "click", => @hide()
+      @$closeButton = CT.$(@closeButton)
+      @$closeButton.click => @hide()
 
       @background = document.createElement "div"
       @$background = CT.$(@background)
 
       @_initStyles()
 
-      @el.appendChild @closeButton
+      @$el.append @closeButton
 
     removeCurrentWidget: =>
-      @el.removeChild @widget.el
+      @widget.$el.remove()
       CT.Widget.removeWidget @widget
 
     ###*
@@ -81,7 +82,7 @@
         id: id ? 0
         src: src
 
-      @el.appendChild @widget.el
+      @$el.append @widget.el
       @$background.fadeIn 'slow'
 
       # Set responsive mode when displaying modal
@@ -104,7 +105,7 @@
 
     setWidth: (width) ->
       width = parseInt width, 10
-      @el.style.maxWidth = width + "px"
+      @$el.css 'maxWidth', width
 
     setHeight: (height) ->
       height = parseInt height, 10
@@ -117,24 +118,29 @@
      * This transitions the modal from a loading state to
      * an active, visible state.
     ###
-    hasLoaded: (height) ->
-      @$el.height(height).delay(20).slideDown 'slow'
+    hasLoaded: ->
+      @$el.fadeIn 'slow'
 
     ###*
     * Called from the constructor to apply styling to the modal and related elements
     *###
     _initStyles: ->
       # Modal container
-      @el.setAttribute "id", "ct-modal"
-      @el.style[attribute] = value for attribute, value of @containerStyle
+      @$el.attr "id", "ct-modal"
+      @$el.css attribute, value for attribute, value of @containerStyle
+
+      # For mobile devices, we don't want a top margin on the modal
+      if (/iPhone|iPod|iPad|Android|BlackBerry/).test navigator.userAgent
+        @$el.css
+          top: 0
 
       # Close button
-      @closeButton.innerHTML = "&#10005;"
-      @closeButton.style[attribute] = value for attribute, value of @closeButtonStyle
+      @$closeButton.html "&#10005;"
+      @$closeButton.css attribute, value for attribute, value of @closeButtonStyle
 
       # Modal dimmed background
-      @background.setAttribute "id", "ct-modal-background"
-      @background.style[attribute] = value for attribute, value of @backgroundStyle
+      @$background.attr "id", "ct-modal-background"
+      @$background.css attribute, value for attribute, value of @backgroundStyle
 
 
   CT.Modal =
@@ -151,8 +157,8 @@
         return
 
       @_modal = new Modal()
-      document.body.insertBefore @_modal.background, document.body.firstChild
-      document.body.insertBefore @_modal.el, document.body.firstChild
+      CT.$('body').prepend @_modal.background
+      CT.$('body').prepend @_modal.el
 
     setWidth: (width) ->
       width = parseInt width, 10
@@ -173,9 +179,8 @@
 
       @setWidth width if width?
 
-    hasLoaded: (height) ->
-      height = parseInt height, 10
-      @_modal.hasLoaded height
+    hasLoaded: ->
+      @_modal.hasLoaded()
 
     hide: ->
       unless @_modal?

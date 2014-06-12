@@ -20,18 +20,18 @@
       @el = document.createElement "iframe"
       @$el = CT.$(@el)
 
-      @el.setAttribute "frameborder", 0
-      @el.setAttribute "scrolling", "no"
-      @el.setAttribute "data-widget-id", @id
-      @el.setAttribute "src", @src
-      @el.style.width = "100%";
-      @el.style.height = "0";
-      @el.style.display = "none";
-      @el.style['-webkit-transform'] = 'translateZ(0)'
-      @el.style['-webkit-backface-visibility'] = 'hidden'
-      @el.style['-webkit-perspective'] = '1000'
+      @$el.attr
+        "frameborder": 0
+        "scrolling": "no"
+        "data-widget-id": @id
+        "src": @src
 
-      CT.Event.addEventListener window, 'message', @_onMessage
+      @$el.css(
+        width: "100%"
+        height: "0"
+      ).hide()
+
+      CT.$(window).on 'message', @_onMessage
 
     ###*
     * Called during widget initialization, responsible for attaching event handler to
@@ -40,6 +40,8 @@
     * For widget-independent event handling, check out the dispatch module.
     *###
     _onMessage: (event) =>
+      event = event.originalEvent
+
       unless CT.Widget.hasOrigin event.origin
         CT.console.log "[Widget #{@id}] Received event from unregistered origin, dropping:", event
         return
@@ -64,7 +66,7 @@
      * Unregisters the #_onMessage 'message' handler
     ###
     _removeListeners: ->
-      CT.Event.removeEventListener window, 'message', @_onMessage
+      CT.$(window).off 'message', @_onMessage
 
     ###*
      * Helper function that returns if widget is being shown in a modal
@@ -77,16 +79,14 @@
       height = parseInt height, 10
 
       if height is 0
-        @$el.hide().height(0)
+        @$el.hide().height 0
       else
         if @$el.height() is 0
-          @$el.height(height).delay(200).fadeIn('slow')
-          CT.Modal.hasLoaded(height) if @inModal()
+          @$el.height(height).delay(200).fadeIn 'slow'
+          CT.Modal.hasLoaded() if @inModal()
         else
-          @$el.animate
-            height: height
-          , 200
-          CT.Modal.setHeight height if @inModal()
+          @$el.height height
+          # CT.Modal.setHeight height if @inModal()
 
     ###*
     * Does `postMessage` on the iframe (@el) with given payload
@@ -163,7 +163,7 @@
         id: id
         src: src
 
-      widgetTag.parentNode.replaceChild widget.el, widgetTag
+      CT.$(widgetTag).replaceWith widget.el
       CT.console.log "Replaced tag", widgetTag, "with widget", widget
 
     ###*
