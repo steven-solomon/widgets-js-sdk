@@ -17,7 +17,7 @@
       margin: 'auto'
       width: '90%'
       position: 'fixed'
-      top: '0'
+      top: '100px'
       right: '0'
       bottom: '0'
       left: '0'
@@ -79,9 +79,7 @@
         src: src
 
       @el.appendChild @widget.el
-
-      @el.style.display = ""
-      @background.style.display = ""
+      CT.$(@background).fadeIn 'slow'
 
       # Set responsive mode when displaying modal
       CT._metaTag.setAttribute 'content', "width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -92,13 +90,12 @@
     * Hides the modal
     *###
     hide: ->
-      @el.style.display = "none"
-      @background.style.display = "none"
+      CT.$(@background).fadeOut 'slow'
+      CT.$(@el).fadeOut 'slow', =>
+        # Revert back to default viewport when hiding modal
+        CT._metaTag.setAttribute 'content', CT._metaTagContent
 
-      # Revert back to default viewport when hiding modal
-      CT._metaTag.setAttribute 'content', CT._metaTagContent
-
-      @removeCurrentWidget() if CT.Widget.getWidgetByWidgetId(@widget?.id)?
+        @removeCurrentWidget() if CT.Widget.getWidgetByWidgetId(@widget?.id)?
 
       return this
 
@@ -106,14 +103,15 @@
       width = parseInt width, 10
       @el.style.maxWidth = width + "px"
 
-    setHeight: (height) ->
-      height = parseInt height, 10
-
-      if height is 0
-        @el.style.display = 'none'
-      else
-        @el.style.display = ''
-        @el.style.height = height + "px"
+    ###*
+     * Called by CT.Widget when a resize event comes in with
+     * a positive height.
+     *
+     * This transitions the modal from a loading state to
+     * an active, visible state.
+    ###
+    hasLoaded: ->
+      CT.$(@el).fadeIn 'slow'
 
     ###*
     * Called from the constructor to apply styling to the modal and related elements
@@ -153,10 +151,6 @@
       width = parseInt width, 10
       @_modal.setWidth width
 
-    setHeight: (height) ->
-      height = parseInt height, 10
-      @_modal.setHeight height
-
     show: ({id, src, width}) ->
       unless @_modal?
         CT.console.log "Modal not initialized!"
@@ -167,6 +161,9 @@
         src: src
 
       @setWidth width if width?
+
+    hasLoaded: ->
+      @_modal.hasLoaded()
 
     hide: ->
       unless @_modal?

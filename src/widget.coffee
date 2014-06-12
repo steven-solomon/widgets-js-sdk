@@ -24,6 +24,11 @@
       @el.setAttribute "data-widget-id", @id
       @el.setAttribute "src", @src
       @el.style.width = "100%";
+      @el.style.height = "0";
+      @el.style.display = "none";
+      @el.style['-webkit-transform'] = 'translateZ(0)'
+      @el.style['-webkit-backface-visibility'] = 'hidden'
+      @el.style['-webkit-perspective'] = '1000'
 
       CT.Event.addEventListener window, 'message', @_onMessage
 
@@ -71,14 +76,15 @@
       height = parseInt height, 10
 
       if height is 0
-        @el.style.display = 'none'
+        CT.$(@el).hide().height(0)
       else
-        @el.style.display = ''
-        @el.style.height = height + "px"
-
-      # If widget is contained in modal, set the
-      # modal container height as well
-      CT.Modal.setHeight height if @inModal()
+        if CT.$(@el).height() is 0
+          CT.$(@el).height(height).delay(200).fadeIn('slow')
+          CT.Modal.hasLoaded() if @inModal()
+        else
+          CT.$(@el).animate
+            height: height
+          , 200
 
     ###*
     * Does `postMessage` on the iframe (@el) with given payload

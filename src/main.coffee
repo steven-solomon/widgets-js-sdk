@@ -3,3 +3,4 @@ if window.CT?.version?
 else
   window.CT =
     version: "0.0.1"
+    $: jQuery.noConflict()

@@ -8,7 +8,7 @@ describe 'CT.Modal', ->
     expect(Modal).to.include.keys [
       'initModalContainer'
       'setWidth'
-      'setHeight'
       'show'
+      'hasLoaded'
       'hide'
     ]

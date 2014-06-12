@@ -17,6 +17,7 @@ module.exports = (grunt) ->
       ]
       libraries: [
         'lib/es5-shim/es5-shim.js'
+        'lib/jquery/dist/jquery.js'
       ]
 
     coffee:
