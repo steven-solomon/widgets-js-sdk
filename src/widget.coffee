@@ -83,7 +83,9 @@
           @$el.height(height).delay(200).fadeIn('slow')
           CT.Modal.hasLoaded(height) if @inModal()
         else
-          @$el.height height
+          @$el.animate
+            height: height
+          , 200
           CT.Modal.setHeight height if @inModal()
 
     ###*
