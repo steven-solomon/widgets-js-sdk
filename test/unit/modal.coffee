@@ -9,6 +9,5 @@ describe 'CT.Modal', ->
       'initModalContainer'
       'setWidth'
       'show'
-      'hasLoaded'
       'hide'
     ]

@@ -107,19 +107,6 @@
       width = parseInt width, 10
       @$el.css 'maxWidth', width
 
-    setHeight: (height) ->
-      height = parseInt height, 10
-      @$el.height height
-
-    ###*
-     * Called by CT.Widget when a resize event comes in with
-     * a positive height.
-     *
-     * This transitions the modal from a loading state to
-     * an active, visible state.
-    ###
-    hasLoaded: ->
-      @$el.fadeIn 'slow'
 
     ###*
     * Called from the constructor to apply styling to the modal and related elements
@@ -164,10 +151,6 @@
       width = parseInt width, 10
       @_modal.setWidth width
 
-    setHeight: (height) ->
-      height = parseInt height, 10
-      @_modal.setHeight height
-
     show: ({id, src, width}) ->
       unless @_modal?
         CT.console.log "Modal not initialized!"
@@ -178,9 +161,6 @@
         src: src
 
       @setWidth width if width?
-
-    hasLoaded: ->
-      @_modal.hasLoaded()
 
     hide: ->
       unless @_modal?

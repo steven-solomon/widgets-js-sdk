@@ -22,7 +22,7 @@
 
       @$el.attr
         "frameborder": 0
-        "scrolling": "no"
+        "scrolling": "auto"
         "data-widget-id": @id
         "src": @src
 
@@ -78,15 +78,20 @@
     setHeight: (height) ->
       height = parseInt height, 10
 
+      if height > (windowHeight = CT.$(window).height()) - 100
+        height = windowHeight - 100
+        CT.Modal._modal.$el.css top: 0 if @inModal()
+      else
+        CT.Modal._modal.$el.css top: CT.Modal._modal.containerStyle.top if @inModal()
+
       if height is 0
         @$el.hide().height 0
       else
         if @$el.height() is 0
           @$el.height(height).delay(200).fadeIn 'slow'
-          CT.Modal.hasLoaded() if @inModal()
+          CT.Modal._modal.$el.fadeIn 'slow' if @inModal()
         else
           @$el.height height
-          # CT.Modal.setHeight height if @inModal()
 
     ###*
     * Does `postMessage` on the iframe (@el) with given payload
