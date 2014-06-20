@@ -25,6 +25,7 @@
       '-webkit-overflow-scrolling': 'touch'
 
     closeButtonStyle:
+      display: 'inline-block'
       float: 'right'
       background: 'none'
       border: 'none'
@@ -117,11 +118,6 @@
       # Modal container
       @$el.attr "id", "ct-modal"
       @$el.css attribute, value for attribute, value of @containerStyle
-
-      # For mobile devices, we don't want a top margin on the modal
-      if (/iPhone|iPod|iPad|Android|BlackBerry/).test navigator.userAgent
-        @$el.css
-          top: 0
 
       # Close button
       @$closeButton.html "&#10005;"
