@@ -73,7 +73,7 @@
      * @return {Boolean} Is widget in a modal?
     ###
     inModal: ->
-      @el.parentNode is CT.Modal._modal.el
+      @el.parentNode is CT.Modal._modal.iframeContainer
 
     setHeight: (height) ->
       height = parseInt height, 10

@@ -23,6 +23,7 @@
       left: '0'
 
     iframeContainerStyle:
+      clear: 'right'
       overflow: 'auto'
       '-webkit-overflow-scrolling': 'touch'
 
