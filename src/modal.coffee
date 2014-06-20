@@ -21,6 +21,8 @@
       right: '0'
       bottom: '0'
       left: '0'
+
+    iframeContainerStyle:
       overflow: 'auto'
       '-webkit-overflow-scrolling': 'touch'
 
@@ -52,6 +54,9 @@
 
       @$el.attr "id", "ct-modal"
 
+      @iframeContainer = document.createElement "div"
+      @$iframeContainer = CT.$(@iframeContainer)
+
       @closeButton = document.createElement "button"
       @$closeButton = CT.$(@closeButton)
       @$closeButton.click => @hide()
@@ -62,6 +67,7 @@
       @_initStyles()
 
       @$el.append @closeButton
+      @$el.append @iframeContainer
 
     removeCurrentWidget: =>
       @widget.$el.remove()
@@ -85,7 +91,7 @@
         id: id ? 0
         src: src
 
-      @$el.append @widget.el
+      @$iframeContainer.append @widget.el
       @$background.fadeIn 'slow'
 
       # Set responsive mode when displaying modal
@@ -118,6 +124,9 @@
       # Modal container
       @$el.attr "id", "ct-modal"
       @$el.css attribute, value for attribute, value of @containerStyle
+
+      # Iframe Container
+      @$iframeContainer.css attribute, value for attribute, value of @iframeContainerStyle
 
       # Close button
       @$closeButton.html "&#10005;"

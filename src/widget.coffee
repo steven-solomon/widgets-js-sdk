@@ -94,7 +94,7 @@
           @$el.height height
 
       if @inModal() and (/iPhone|iPod|iPad|Android|BlackBerry/).test navigator.userAgent
-        CT.Modal._modal.$el.height height
+        CT.Modal._modal.$iframeContainer.height height
 
     ###*
     * Does `postMessage` on the iframe (@el) with given payload
