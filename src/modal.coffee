@@ -21,6 +21,8 @@
       right: '0'
       bottom: '0'
       left: '0'
+      overflow: 'auto'
+      '-webkit-overflow-scrolling': 'touch'
 
     closeButtonStyle:
       float: 'right'
