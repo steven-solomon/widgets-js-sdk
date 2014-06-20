@@ -10,10 +10,7 @@ describe 'SDK: Widget', ->
       iframeEl1 = $('iframe[data-widget-id="1"]')
       iframeEl2 = $('iframe[data-widget-id="2"]')
 
-      expect(iframeEl1.isDisplayed()).to.eventually.equal true
       expect(iframeEl1.getAttribute('src')).to.eventually.equal 'http://localhost:3001/widget1.html/'
-
-      expect(iframeEl2.isDisplayed()).to.eventually.equal true
       expect(iframeEl2.getAttribute('src')).to.eventually.equal 'http://localhost:3001/widget2.html/'
 
   describe 'hasOrigin()', ->

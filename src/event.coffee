@@ -45,34 +45,6 @@
 
   CT.Event =
     ###*
-    * Shim for default browser addEventListener with IE 8 fallback
-    ###
-    addEventListener: (el, name, handler) ->
-      if typeof el.addEventListener is "function"
-        el.addEventListener name, handler
-      else
-        el.attachEvent "on" + name, handler
-
-    ###*
-    * Shim for default browser removeEventListener with IE 8 fallback
-    ###
-    removeEventListener: (el, name, handler) ->
-      if typeof el.removeEventListener is "function"
-        el.removeEventListener name, handler
-      else
-        el.detachEvent "on" + name, handler
-
-    ###*
-    * Executes a function when the DOM is fully loaded
-    ###
-    ready: (handler) ->
-      if typeof document.addEventListener is "function"
-        document.addEventListener "DOMContentLoaded", handler
-      else
-        document.attachEvent "onreadystatechange", ->
-          handler() if document.readyState is "complete"
-
-    ###*
      * Used by Widget SDK to trigger certain events
      *
      * @param  {String} name        Name of event to trigger

@@ -25,39 +25,5 @@ describe 'SDK: Modal', ->
           id: 0
           src: '//localhost:3001/widget2.html'
 
-      modalEl = $('#ct-modal')
-      modalBackgroundEl = $('#ct-modal-background')
       modalIframeEl = $('#ct-modal iframe')
-
-      expect(modalEl.isDisplayed()).to.eventually.equal true
-      expect(modalBackgroundEl.isDisplayed()).to.eventually.equal true
       expect(modalIframeEl.getAttribute('src')).to.eventually.equal 'http://localhost:3001/widget2.html/'
-
-  describe 'hide()', ->
-    it 'should hide modal', ->
-      exec ->
-        CT.Modal.hide()
-
-      modalEl = $('#ct-modal')
-      modalBackgroundEl = $('#ct-modal-background')
-
-      expect(modalEl.isDisplayed()).to.eventually.equal false
-      expect(modalBackgroundEl.isDisplayed()).to.eventually.equal false
-
-    it 'should hide modal with button click', ->
-      exec ->
-        CT.Modal.show
-          id: 0
-          src: '//localhost:3001/widget2.html'
-
-      modalEl = $('#ct-modal')
-      modalBackgroundEl = $('#ct-modal-background')
-      closeButtonEl = $('#ct-modal button')
-
-      expect(modalEl.isDisplayed()).to.eventually.equal true
-      expect(modalBackgroundEl.isDisplayed()).to.eventually.equal true
-
-      closeButtonEl.click()
-
-      expect(modalEl.isDisplayed()).to.eventually.equal false
-      expect(modalBackgroundEl.isDisplayed()).to.eventually.equal false

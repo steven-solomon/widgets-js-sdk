@@ -6,9 +6,6 @@ describe 'CT.Event', ->
 
   it 'should contain properties and methods', ->
     expect(Event).to.include.keys [
-      'addEventListener'
-      'removeEventListener'
-      'ready'
       'trigger'
       'subscribe'
       'unsubscribe'

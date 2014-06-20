@@ -7,7 +7,7 @@ CT.console.group "Bootstrap"
 CT.console.time "Bootstrapped in"
 CT.console.time "DOM loaded"
 
-CT.Event.ready ->
+CT.$(document).ready ->
   CT.console.timeEnd "DOM loaded"
 
   # Used by CT.Modal to start and stop responsive mode when displaying modals

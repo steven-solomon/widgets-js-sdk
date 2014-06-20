@@ -16,7 +16,7 @@ module.exports = (grunt) ->
         'src/bootstrap.coffee'
       ]
       libraries: [
-        'lib/es5-shim/es5-shim.js'
+        # 'lib/es5-shim/es5-shim.js'
         'lib/jquery/dist/jquery.js'
       ]
 
