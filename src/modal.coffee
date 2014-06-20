@@ -30,6 +30,7 @@
     closeButtonStyle:
       display: 'inline-block'
       float: 'right'
+      padding: '0'
       background: 'none'
       border: 'none'
       color: '#ffffff'
