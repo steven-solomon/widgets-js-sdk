@@ -12,8 +12,8 @@
   *###
   class Modal
     containerStyle:
-      display: 'none'
-      zIndex: '100000'
+      opacity: '0'
+      zIndex: '-10000'
       margin: 'auto'
       width: '90%'
       position: 'fixed'
@@ -106,7 +106,10 @@
     *###
     hide: ->
       @$background.fadeOut 'slow'
-      @$el.fadeOut 'slow', =>
+      @$el.fadeTo 'slow', 0, =>
+        @$el.css
+          zIndex: '-10000'
+
         # Revert back to default viewport when hiding modal
         CT._metaTag.setAttribute 'content', CT._metaTagContent
 

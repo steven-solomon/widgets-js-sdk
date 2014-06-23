@@ -26,10 +26,10 @@
         "data-widget-id": @id
         "src": @src
 
-      @$el.css(
+      @$el.css
+        opacity: "0"
         width: "100%"
         height: "0"
-      ).hide()
 
       CT.$(window).on 'message', @_onMessage
 
@@ -85,11 +85,12 @@
         CT.Modal._modal.$el.css top: CT.Modal._modal.containerStyle.top if @inModal()
 
       if height is 0
-        @$el.hide().height 0
+        @$el.height(0).fadeTo 'fast', 0
       else
         if @$el.height() is 0
-          @$el.height(height).delay(200).fadeIn 'slow'
-          CT.Modal._modal.$el.fadeIn 'slow' if @inModal()
+          @$el.height(height).delay(200).fadeTo 'slow', 1
+          if @inModal()
+            CT.Modal._modal.$el.css('zIndex', '10000').fadeTo 'slow', 1
         else
           @$el.height height
 

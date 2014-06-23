@@ -8,7 +8,6 @@ describe 'SDK: Modal', ->
 
       modalEl = $('#ct-modal')
 
-      expect(modalEl.isDisplayed()).to.eventually.equal false
       expect(modalEl.isElementPresent(By.css('button'))).to.eventually.equal true
 
     it 'should initialize modal background', ->
