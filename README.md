@@ -8,6 +8,8 @@ The [CrowdTwist](http://crowdtwist.com) Widgets SDK for JavaScript provides clie
 
 - [jQuery v1.11.1](http://jquery.org/)
 
+## [Changelog](CHANGELOG.md)
+
 ## Building
 
 To build the final **sdk/widgets.js** file:
