@@ -1,16 +1,14 @@
-# CrowdTwist Widgets SDK for JavaScript
+# Widgets SDK for JavaScript
 
-The CrowdTwist Widgets SDK for JavaScript provides client-side functionality for embedding various Fan Center components such as Activities and Rewards directly into a third-party webpage.
+[![Build Status](https://travis-ci.org/CrowdTwist/widgets-js-sdk.svg)](https://travis-ci.org/CrowdTwist/widgets-js-sdk)
+
+The [CrowdTwist](http://crowdtwist.com) Widgets SDK for JavaScript provides client-side functionality for embedding various Fan Center components such as Activities and Rewards directly into a third-party webpage.
 
 ## Dependencies
 
-- [ES5-Shim](https://github.com/es-shims/es5-shim) - For IE 8 support
+- [jQuery v1.11.1](http://jquery.org/)
 
-## Core Functionality
-
-- Converting widget tags to iframes
-- Handling communications between widgets and host page
-- Displaying modal on host page
+## [Changelog](CHANGELOG.md)
 
 ## Building
 
@@ -22,11 +20,19 @@ To build the final **sdk/widgets.js** file:
 
 ## Testing
 
-[Protractor](https://github.com/angular/protractor) and [WebDriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs) for automated selenium tests.
+### E2E *(test/e2e)*
 
-Specs are written in CoffeeScript and can be found in **test/specs/**.
+- [Protractor](https://github.com/angular/protractor)
+- [WebDriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs)
+- [Chai As Promised](http://chaijs.com/plugins/chai-as-promised)
 
-To run the test suite:
+### Unit *(test/unit)*
+
+- [Mocha](http://visionmedia.github.io/mocha/)
+- [Sinon.JS](http://sinonjs.org/)
+
+To run the full test suite:
 
     $ npm install
+    $ bower install
     $ npm test

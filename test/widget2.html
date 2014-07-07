@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Widget 2</title>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .overview {
+      width: 200px;
+      background-color: #fefefe;
+      padding: 10px;
+      border: 1px solid #d5d5d5;
+
+      box-shadow: 0px 1px 1px 0px #d5d5d5;
+    }
+  </style>
+</head>
+<body onload="loaded()">
+<script>
+  window.addEventListener('message', function (event) {
+    var payload = JSON.parse(event.data);
+
+    if (payload.eventName === "logout") {
+      document.body.innerText = payload.eventData.user.name + " has logged out!";
+    }
+  }, false);
+
+  function loaded() {
+    var payload = {
+      widgetId: 2,
+      eventName: 'resize',
+      eventData: {
+        height: document.body.offsetHeight
+      }
+    };
+    window.parent.postMessage(JSON.stringify(payload), '*');
+  }
+
+  function logout() {
+    var payload = {
+      widgetId: 2,
+      eventName: 'logout',
+      eventData: {
+        user: {
+          name: 'Bob',
+          points: 1337
+        }
+      }
+    };
+    window.parent.postMessage(JSON.stringify(payload), '*');
+  }
+</script>
+
+<div class="overview clearfix">
+  <h3>Bob</h3>
+  <hr/>
+  <div>
+    <p>1,337 points</p>
+    <a href="javascript:void(0)" onclick="logout()">Logout</a>
+  </div>
+</div>
+
+</body>
+</html>
