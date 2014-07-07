@@ -1,13 +1,12 @@
 {
-  "name": "widget-sdk",
-  "version": "0.0.1",
-  "homepage": "https://github.com/CrowdTwist/web",
+  "name": "crowdtwist-widgets-js-sdk",
+  "version": "0.1.0",
+  "homepage": "http://crowdtwist.com",
   "authors": [
     "Mark Fayngersh <mark@crowdtwist.com>",
-    "Orr Bibring <orr@crowdtwist.com"
+    "Orr Bibring <orr@crowdtwist.com>"
   ],
   "license": "Apache v2",
-  "private": true,
   "ignore": [
     "config",
     "node_modules",
@@ -15,8 +14,7 @@
     "lib",
     "test"
   ],
-  "devDependencies": {
-    "es5-shim": "~2.3.0",
+  "dependencies": {
     "jquery": "~1.11.1"
   }
 }

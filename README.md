@@ -1,12 +1,12 @@
 # Widgets SDK for JavaScript
 
-[![Build Status](https://travis-ci.org/CrowdTwist/widgets-js-sdk.svg?branch=develop)](https://travis-ci.org/CrowdTwist/widgets-js-sdk)
+[![Build Status](https://travis-ci.org/CrowdTwist/widgets-js-sdk.svg)](https://travis-ci.org/CrowdTwist/widgets-js-sdk)
 
 The [CrowdTwist](http://crowdtwist.com) Widgets SDK for JavaScript provides client-side functionality for embedding various Fan Center components such as Activities and Rewards directly into a third-party webpage.
 
 ## Dependencies
 
-- [ES5-Shim](https://github.com/es-shims/es5-shim) - For IE 8 support
+- [jQuery v1.11.1](http://jquery.org/)
 
 ## Building
 

@@ -1,8 +1,13 @@
 {
-  "name": "widgets",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {},
+  "name": "crowdtwist-widgets-js-sdk",
+  "version": "0.1.0",
+  "contributors": [{
+    "name": "Mark Fayngersh",
+    "email": "mark@crowdtwist.com"
+  }, {
+    "name": "Orr Bibring",
+    "email": "orr@crowdtwist.com"
+  }],
   "devDependencies": {
     "grunt": "~0.4.4",
     "grunt-express-server": "~0.4.13",
