@@ -92,6 +92,7 @@
       @widget = CT.Widget.addWidget
         id: id ? 0
         src: src
+        scroll: true
 
       @$iframeContainer.append @widget.el
       @$background.fadeIn 'slow'
