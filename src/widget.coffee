@@ -10,8 +10,9 @@
   * Class representing a widget
   ###
   class Widget
-    constructor: ({@src, id}) ->
+    constructor: ({@src, id, scroll}) ->
       @id = parseInt id, 10
+      scroll ?= false
 
       # Enforce trailing slash for browser consistency
       @src += "/" if @src.charAt(@src.length - 1) isnt "/"
@@ -22,7 +23,7 @@
 
       @$el.attr
         "frameborder": 0
-        "scrolling": "auto"
+        "scrolling": if scroll then "auto" else "no"
         "data-widget-id": @id
         "src": @src
 
@@ -78,9 +79,10 @@
     setHeight: (height) ->
       height = parseInt height, 10
 
-      if height > (windowHeight = CT.$(window).height()) - 100
-        height = windowHeight - 100
-        CT.Modal._modal.$el.css top: 0 if @inModal()
+      if height > ((windowHeight = CT.$(window).height()) - 100)
+        if @inModal()
+          height = windowHeight - 100
+          CT.Modal._modal.$el.css top: 0
       else
         CT.Modal._modal.$el.css top: CT.Modal._modal.containerStyle.top if @inModal()
 
