@@ -80,8 +80,9 @@
       height = parseInt height, 10
 
       if height > ((windowHeight = CT.$(window).height()) - 100)
-        #height = windowHeight - 100
-        CT.Modal._modal.$el.css top: 0 if @inModal()
+        if @inModal()
+          height = windowHeight - 100
+          CT.Modal._modal.$el.css top: 0
       else
         CT.Modal._modal.$el.css top: CT.Modal._modal.containerStyle.top if @inModal()
 
