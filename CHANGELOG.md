@@ -1,3 +1,7 @@
+# 0.1.1
+
+- **[Fix](https://github.com/CrowdTwist/widgets-js-sdk/commit/4ad15eed38a93d71b2e6c6d4a47747a5ca2c7640)** - Scrolling issue where two scrollbars would appear due to max height feature. Now, only extra scroll bar will appear in modals when not enough vertical space is available in the viewport.
+
 # 0.1.0
 
 This is the first major release to go live and features the following changes:
