@@ -128,13 +128,15 @@
      * Given a widget id and src, creates a new Widget and adds it to
      * the list of _widgets
      *
-     * @param {Number} id   The widget id
-     * @param {String} src  Tne widget url
+     * @param {Number}  id      The widget id
+     * @param {String}  src     The widget url
+     * @param {Boolean} scroll  Whether the widget container should scroll
     ###
-    addWidget: ({id, src}) ->
+    addWidget: ({id, src, scroll}) ->
       widget = new Widget
         id: id ? 0
         src: src
+        scroll: scroll
 
       @_widgets.push widget
       return widget
