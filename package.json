@@ -1,12 +1,9 @@
 {
   "name": "crowdtwist-widgets-js-sdk",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "contributors": [{
     "name": "Mark Fayngersh",
     "email": "mark@crowdtwist.com"
-  }, {
-    "name": "Orr Bibring",
-    "email": "orr@crowdtwist.com"
   }],
   "devDependencies": {
     "grunt": "~0.4.4",

@@ -1,5 +1,5 @@
 describe 'CT.Event', ->
-  {Event} = window.CT
+  {Event} = window.CrowdTwist
 
   it 'should exist', ->
     expect(Event).to.exist

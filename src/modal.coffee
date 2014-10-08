@@ -183,4 +183,4 @@
       @_modal.hide()
 
 
-)(window.CT)
+)(window.CrowdTwist)

@@ -101,4 +101,4 @@
           delete @_events[name] unless retain.length
 
       return this
-)(window.CT)
+)(window.CrowdTwist)

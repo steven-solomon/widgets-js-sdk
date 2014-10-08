@@ -1,6 +1,6 @@
-if window.CT?.version?
-  console.log "CrowdTwist Widgets SDK already loaded! This is potentially problematic."
+if window.CrowdTwist?
+  console.error "CrowdTwist Widgets SDK already loaded! This is potentially problematic."
 else
-  window.CT =
-    version: "0.1.1"
+  window.CrowdTwist =
+    version: "0.2.0"
     $: jQuery.noConflict()

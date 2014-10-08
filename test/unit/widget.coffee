@@ -1,5 +1,5 @@
 describe 'CT.Widget', ->
-  {Widget} = window.CT
+  {Widget} = window.CrowdTwist
 
   it 'should exist', ->
     expect(Widget).to.exist

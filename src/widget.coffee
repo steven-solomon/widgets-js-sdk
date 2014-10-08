@@ -202,4 +202,4 @@
       for widget in @_widgets
         return widget if widget.id is widgetId
 
-)(window.CT)
+)(window.CrowdTwist)

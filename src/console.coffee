@@ -40,4 +40,4 @@
     timeEnd: (label) ->
       if DEBUG
         console.timeEnd?(LOG_PREFIX + " " + label)
-)(window.CT)
+)(window.CrowdTwist)

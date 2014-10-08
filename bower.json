@@ -1,10 +1,9 @@
 {
   "name": "crowdtwist-widgets-js-sdk",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "homepage": "http://crowdtwist.com",
   "authors": [
-    "Mark Fayngersh <mark@crowdtwist.com>",
-    "Orr Bibring <orr@crowdtwist.com>"
+    "Mark Fayngersh <mark@crowdtwist.com>"
   ],
   "license": "Apache v2",
   "ignore": [

@@ -6,7 +6,7 @@ chai.use(sinonChai);
 global.sinon = sinon;
 global.expect = chai.expect;
 global.window = {
-  CT: {}
+  CrowdTwist: {}
 };
 
 require('../../src/console');

@@ -1,5 +1,5 @@
 describe 'CT.console', ->
-  {console} = window.CT
+  {console} = window.CrowdTwist
 
   it 'should exist', ->
     expect(console).to.exist

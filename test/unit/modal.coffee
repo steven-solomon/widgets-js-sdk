@@ -1,5 +1,5 @@
 describe 'CT.Modal', ->
-  {Modal} = window.CT
+  {Modal} = window.CrowdTwist
 
   it 'should exist', ->
     expect(Modal).to.exist

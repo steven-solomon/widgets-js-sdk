@@ -20,7 +20,7 @@ describe 'SDK: Modal', ->
   describe 'show()', ->
     it 'should display modal with widget url', ->
       exec ->
-        CT.Modal.show
+        CrowdTwist.Modal.show
           id: 0
           src: '//localhost:3001/widget2.html'
 
