@@ -1,3 +1,9 @@
+# 0.2.0
+
+This is a major version update in the sense that a lot of files were changed to support the global object rename from `CT` to `CrowdTwist` to avoid collisions with third-party libraries, therefore it is not backwards compatible with previous versions.
+
+Other than the rename, no changes in functionality are introduced with this release.
+
 # 0.1.1
 
 - **[Fix](https://github.com/CrowdTwist/widgets-js-sdk/commit/4ad15eed38a93d71b2e6c6d4a47747a5ca2c7640)** - Scrolling issue where two scrollbars would appear due to max height feature. Now, only extra scroll bar will appear in modals when not enough vertical space is available in the viewport.
