@@ -1,3 +1,7 @@
+# 0.2.1
+
+Dispatch now handles `host:request` events that request properties on host page whose values should be returned to the originating widget iframe.
+
 # 0.2.0
 
 This is a major version update in the sense that a lot of files were changed to support the global object rename from `CT` to `CrowdTwist` to avoid collisions with third-party libraries, therefore it is not backwards compatible with previous versions.
