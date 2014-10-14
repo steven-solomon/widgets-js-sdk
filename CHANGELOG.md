@@ -1,3 +1,7 @@
+# 0.2.2
+
+[jQuery.noConflict()](http://api.jquery.com/jquery.noconflict/) call now removes all jQuery variables from global scope to prevent conflict with pages that already include a separate version of jQuery.
+
 # 0.2.1
 
 Dispatch now handles `host:request` events that request properties on host page whose values should be returned to the originating widget iframe.
