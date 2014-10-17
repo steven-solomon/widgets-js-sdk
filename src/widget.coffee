@@ -79,7 +79,10 @@
     setHeight: (height) ->
       height = parseInt height, 10
 
-      if height > ((windowHeight = CT.$(window).height()) - 100)
+      # In case of iPad landscape dimensions bug
+      windowHeight = window.innerHeight if @inModal() && (/iPhone|iPod|iPad/).test navigator.userAgent
+
+      if height > ((windowHeight ?= CT.$(window).height()) - 100)
         if @inModal()
           height = windowHeight - 100
           CT.Modal._modal.$el.css top: 0
