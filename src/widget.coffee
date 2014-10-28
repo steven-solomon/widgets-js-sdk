@@ -80,7 +80,8 @@
       height = parseInt height, 10
 
       # In case of iPad landscape dimensions bug
-      windowHeight = window.innerHeight if @inModal() && (/iPhone|iPod|iPad/).test navigator.userAgent
+      if /iPhone|iPod|iPad/.test(navigator.userAgent) && @inModal()
+        windowHeight = window.innerHeight
 
       if height > ((windowHeight ?= CT.$(window).height()) - 100)
         if @inModal()
