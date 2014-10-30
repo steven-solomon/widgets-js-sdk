@@ -1,3 +1,9 @@
+# 0.2.3
+
+Tweaked logic around setting widget height, specifically to take into account differences between browsers determining heights differently.
+
+Credit also due to @pborshchahivskyi for investigating original issue and proposing use of window.innerHeight.
+
 # 0.2.2
 
 [jQuery.noConflict()](http://api.jquery.com/jquery.noconflict/) call now removes all jQuery variables from global scope to prevent conflict with pages that already include a separate version of jQuery.
