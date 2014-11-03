@@ -8,6 +8,14 @@
 ###
 ((CT) ->
 
+  class WindowFacade
+    constructor: (@window) ->
+
+    displayExternalURL: (url) =>
+      @window.open url, '_blank'
+
+  CT.WindowFacade = WindowFacade
+
   ###*
    * Given an object and a path to a deep property, return value of property.
    * Used by 'host:request' event to retrieve arbitrary property on the parent window.
