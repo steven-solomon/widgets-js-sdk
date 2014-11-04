@@ -15,7 +15,7 @@
       windowReference = @window.open url, '_blank'
       @window.location.href = url unless windowReference?
 
-  CT._WindowFacade_ = WindowFacade
+  windowFacade = new WindowFacade(window);
 
   ###*
    * Given an object and a path to a deep property, return value of property.
@@ -70,7 +70,6 @@
         if url?
           CT.console.log "[Dispatch] Received 'navigate' event, opening url:", url
 
-          windowFacade = new WindowFacade(window)
           windowFacade.displayExternalURL url
         else
           CT.console.log "[Dispatch] Received 'navigate' event with no 'url'", payload
