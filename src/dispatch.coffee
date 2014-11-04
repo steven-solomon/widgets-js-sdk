@@ -12,8 +12,8 @@
     constructor: (@window) ->
 
     displayExternalURL: (url) =>
-      open = @window.open url, '_blank'
-      unless open? then @window.location url
+      windowReference = @window.open url, '_blank'
+      unless windowReference? then @window.location url
 
   CT.WindowFacade = WindowFacade
 
