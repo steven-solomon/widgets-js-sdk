@@ -22,24 +22,38 @@ describe 'CT Dispatch\'s Internal Window Facade', ->
 
       expect(openSpy).to.be.calledOnce
 
-    it 'should call window.open with desired arguments', ->
+    it 'should call window.open with correct arguments', ->
       windowFacade.displayExternalURL(KNOWN_URL)
 
       expect(openSpy).to.be.calledWith KNOWN_URL, '_blank'
 
   describe 'displayExternalURL when window.open returns null', ->
-    it 'should call window.location', ->
-      fakeWindow  =
+    fakeWindow  =
         open: (url, target) ->
         location: (url) ->
+    openStub = null
+    locationSpy = null
+    windowFacade = null
+
+    before ->
       openStub = sinon.stub fakeWindow, 'open', ->
         return undefined
       locationSpy = sinon.spy(fakeWindow, 'location')
       windowFacade = new _WindowFacade_(fakeWindow)
 
+    after ->
+      openStub.reset()
+      locationSpy.reset()
+
+    it 'should call window.location', ->
       windowFacade.displayExternalURL(KNOWN_URL)
 
       expect(locationSpy).to.be.calledOnce
+
+    it 'should call window.location with url', ->
+      windowFacade.displayExternalURL(KNOWN_URL)
+
+      expect(locationSpy).to.be.calledWith KNOWN_URL
 
 
 
