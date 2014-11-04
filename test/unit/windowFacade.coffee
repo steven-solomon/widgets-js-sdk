@@ -5,7 +5,8 @@ describe 'SDK: Dispatch Window Facade', ->
   it 'displayExternalURL calls window.open', ->
     fakeWindow  =
       open: (url, target) ->
-    openSpy = sinon.spy(fakeWindow, 'open');
+    openSpy = sinon.stub fakeWindow, 'open', ->
+      return {}
     windowFacade = new WindowFacade(fakeWindow)
 
     windowFacade.displayExternalURL(KNOWN_URL)
@@ -15,20 +16,26 @@ describe 'SDK: Dispatch Window Facade', ->
   it 'displayExternalURL calls window.open with desired arguments', ->
     fakeWindow  =
       open: (url, target) ->
-    openSpy = sinon.spy(fakeWindow, 'open');
+    openSpy = sinon.stub fakeWindow, 'open', ->
+      return {}
     windowFacade = new WindowFacade(fakeWindow)
 
     windowFacade.displayExternalURL(KNOWN_URL)
 
     expect(openSpy).to.be.calledWith KNOWN_URL, '_blank'
 
-  # it 'foo', ->
-  #   locationSpy = sinon.spy(fakeWindow, 'location')
-  #   windowFacade = new WindowFacade(fakeWindow)
+  it 'displayExternalURL calls window.location when window.open returns undefined', ->
+    fakeWindow  =
+      open: (url, target) ->
+      location: (url) ->
+    openStub = sinon.stub fakeWindow, 'open', ->
+      return undefined
+    locationSpy = sinon.spy(fakeWindow, 'location')
+    windowFacade = new WindowFacade(fakeWindow)
 
-  #   windowFacade.displayExternalURL(KNOWN_URL)
+    windowFacade.displayExternalURL(KNOWN_URL)
 
-  #   expect(openSpy).to.be.calledWith KNOWN_URL, '_blank'
+    expect(locationSpy).to.be.calledOnce
 
 
 
