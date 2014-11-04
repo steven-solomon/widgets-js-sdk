@@ -1,5 +1,5 @@
 describe 'CT Dispatch\'s Internal Window Facade', ->
-  {WindowFacade} = window.CrowdTwist
+  {_WindowFacade_} = window.CrowdTwist
   KNOWN_URL = 'http://www.crowdtwist.com'
 
   describe 'displayExternalURL', ->
@@ -11,7 +11,7 @@ describe 'CT Dispatch\'s Internal Window Facade', ->
     before ->
       openSpy = sinon.stub fakeWindow, 'open', ->
         return {}
-      windowFacade = new WindowFacade(fakeWindow)
+      windowFacade = new _WindowFacade_(fakeWindow)
 
     after ->
       openSpy.reset()
@@ -35,7 +35,7 @@ describe 'CT Dispatch\'s Internal Window Facade', ->
       openStub = sinon.stub fakeWindow, 'open', ->
         return undefined
       locationSpy = sinon.spy(fakeWindow, 'location')
-      windowFacade = new WindowFacade(fakeWindow)
+      windowFacade = new _WindowFacade_(fakeWindow)
 
       windowFacade.displayExternalURL(KNOWN_URL)
 

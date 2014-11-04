@@ -15,7 +15,7 @@
       windowReference = @window.open url, '_blank'
       unless windowReference? then @window.location url
 
-  CT.WindowFacade = WindowFacade
+  CT._WindowFacade_ = WindowFacade
 
   ###*
    * Given an object and a path to a deep property, return value of property.
