@@ -1,3 +1,8 @@
+# 0.2.4
+
+Provide more robust 'navigate' message handling. If a browser stops a new tab from being opend via
+window.open in response to a 'navigate' message, then the window.location.href will be set instead.
+
 # 0.2.3
 
 Tweaked logic around setting widget height, specifically to take into account differences between browsers determining heights differently.

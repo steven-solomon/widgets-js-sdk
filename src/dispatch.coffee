@@ -8,6 +8,15 @@
 ###
 ((CT) ->
 
+  class WindowFacade
+    constructor: (@window) ->
+
+    displayExternalURL: (url) =>
+      windowReference = @window.open url, '_blank'
+      @window.location.href = url unless windowReference?
+
+  windowFacade = new WindowFacade(window);
+
   ###*
    * Given an object and a path to a deep property, return value of property.
    * Used by 'host:request' event to retrieve arbitrary property on the parent window.
@@ -61,7 +70,7 @@
         if url?
           CT.console.log "[Dispatch] Received 'navigate' event, opening url:", url
 
-          window.open url, "_blank"
+          windowFacade.displayExternalURL url
         else
           CT.console.log "[Dispatch] Received 'navigate' event with no 'url'", payload
       when "host:request"
