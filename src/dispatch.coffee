@@ -70,7 +70,8 @@
         if url?
           CT.console.log "[Dispatch] Received 'navigate' event, opening url:", url
 
-          window.open url, "_blank"
+          windowFacade = new WindowFacade(window)
+          windowFacade.displayExternalURL url
         else
           CT.console.log "[Dispatch] Received 'navigate' event with no 'url'", payload
       when "host:request"
