@@ -1,32 +1,34 @@
-describe 'SDK: Dispatch Window Facade', ->
+describe 'CT Dispatch\'s Internal Window Facade', ->
   {WindowFacade} = window.CrowdTwist
   KNOWN_URL = 'http://www.crowdtwist.com'
 
-  describe 'window.open success', ->
-    it 'displayExternalURL calls window.open', ->
-      fakeWindow  =
-        open: (url, target) ->
+  describe 'displayExternalURL', ->
+    fakeWindow  =
+      open: (url, target) ->
+    openSpy = null
+    windowFacade = null
+
+    before ->
       openSpy = sinon.stub fakeWindow, 'open', ->
         return {}
       windowFacade = new WindowFacade(fakeWindow)
 
+    after ->
+      openSpy.reset()
+      windowFacade = null
+
+    it 'should call window.open', ->
       windowFacade.displayExternalURL(KNOWN_URL)
 
       expect(openSpy).to.be.calledOnce
 
-    it 'displayExternalURL calls window.open with desired arguments', ->
-      fakeWindow  =
-        open: (url, target) ->
-      openSpy = sinon.stub fakeWindow, 'open', ->
-        return {}
-      windowFacade = new WindowFacade(fakeWindow)
-
+    it 'should call window.open with desired arguments', ->
       windowFacade.displayExternalURL(KNOWN_URL)
 
       expect(openSpy).to.be.calledWith KNOWN_URL, '_blank'
 
-  describe 'window.open failure', ->
-    it 'displayExternalURL calls window.location when window.open returns undefined', ->
+  describe 'displayExternalURL when window.open returns null', ->
+    it 'should call window.location', ->
       fakeWindow  =
         open: (url, target) ->
         location: (url) ->
