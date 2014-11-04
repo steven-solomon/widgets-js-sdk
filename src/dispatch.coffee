@@ -13,7 +13,7 @@
 
     displayExternalURL: (url) =>
       windowReference = @window.open url, '_blank'
-      unless windowReference? then @window.location url
+      @window.location url unless windowReference?
 
   CT._WindowFacade_ = WindowFacade
 
