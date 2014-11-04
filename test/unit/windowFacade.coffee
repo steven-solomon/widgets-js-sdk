@@ -1,4 +1,4 @@
-describe 'CT Dispatch\'s Internal Window Facade', ->
+describe "CT Dispatch's Internal Window Facade", ->
   {_WindowFacade_} = window.CrowdTwist
   KNOWN_URL = 'http://www.crowdtwist.com'
 
