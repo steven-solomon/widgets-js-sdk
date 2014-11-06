@@ -1,3 +1,7 @@
+# 0.2.5
+
+When setting widget heights in modals, enforce modal container to have explicit height with additional room.
+
 # 0.2.4
 
 Provide more robust 'navigate' message handling. If a browser stops a new tab from being opend via

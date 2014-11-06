@@ -83,8 +83,7 @@
         if height > (adjustedHeight = windowHeight - 100)
           height = adjustedHeight
 
-        if (/iPhone|iPod|iPad|Android|BlackBerry/).test navigator.userAgent
-          CT.Modal._modal.$iframeContainer.height height
+        CT.Modal._modal.$iframeContainer.height height + 10
 
       if height is 0
         @$el.height(0).fadeTo 'fast', 0
